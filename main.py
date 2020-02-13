@@ -1,4 +1,4 @@
-class Edge:
+class Node:
     x = None
     y = None
 
@@ -10,7 +10,7 @@ class Edge:
         return ""+str(self.x)+" "+str(self.y)
 
     def __eq__(self, other):
-        if isinstance(other,Edge):
+        if isinstance(other, Node):
             return self.x == other.x and self.y == other.y
         return False
 
@@ -18,8 +18,8 @@ class Edge:
         return hash(tuple(sorted(self.__dict__.items())))
 
 def go():
-    start = Edge(7, 0)
-    end = Edge(0, 7)
+    start = Node(7, 0)
+    end = Node(0, 7)
     level = {start: 0}
 
     parent = {start: None}
@@ -33,7 +33,7 @@ def go():
             if item == end:
                 flag = True
                 break
-            temp = contruct_edges(item)
+            temp = contruct_nodes(item)
             for value in temp:
                 if value not in level:
                     level[value] = f
@@ -43,7 +43,7 @@ def go():
         frontier = next
         f += 1
 
-    print("minimum steps : {}".format(level[Edge(0,7)]))
+    print("minimum steps : {}".format(level[Node(0, 7)]))
     print("the path :")
     shortest_path(parent,start,end)
 
@@ -53,18 +53,18 @@ def shortest_path(parent,src,dest):
         shortest_path(parent,src,parent[dest])
         print(dest)
 
-def contruct_edges(edge):
+def contruct_nodes(edge):
     list = []
     x = edge.x
     y = edge.y
-    if valid(x - 2, y + 1):   list.append(Edge(x - 2, y + 1))
-    if valid(x - 2, y - 1):   list.append(Edge(x - 2, y - 1))
-    if valid(x + 2, y + 1):   list.append(Edge(x + 2, y + 1))
-    if valid(x + 2, y - 1):   list.append(Edge(x + 2, y - 1))
-    if valid(x - 1, y + 2):   list.append(Edge(x - 1, y + 2))
-    if valid(x + 1, y + 2):   list.append(Edge(x + 1, y + 2))
-    if valid(x - 1, y - 2):   list.append(Edge(x - 1, y - 2))
-    if valid(x + 1, y - 2):   list.append(Edge(x + 1, y - 2))
+    if valid(x - 2, y + 1):   list.append(Node(x - 2, y + 1))
+    if valid(x - 2, y - 1):   list.append(Node(x - 2, y - 1))
+    if valid(x + 2, y + 1):   list.append(Node(x + 2, y + 1))
+    if valid(x + 2, y - 1):   list.append(Node(x + 2, y - 1))
+    if valid(x - 1, y + 2):   list.append(Node(x - 1, y + 2))
+    if valid(x + 1, y + 2):   list.append(Node(x + 1, y + 2))
+    if valid(x - 1, y - 2):   list.append(Node(x - 1, y - 2))
+    if valid(x + 1, y - 2):   list.append(Node(x + 1, y - 2))
 
     return list
 
